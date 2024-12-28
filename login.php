@@ -1,8 +1,7 @@
 <?php
-// PHP: login.php
 session_start();
 
-// Redirect to index.php if already logged in
+// If already logged in, redirect to index.php
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     header("Location: index.php");
     exit;
@@ -17,123 +16,165 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     <title>Login - DIU Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #004d40, #00bfa5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(to right, #004d40, #00bfa5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
+    .login-container {
+        width: 90%;
+        max-width: 400px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    .header {
+        text-align: center;
+        padding: 20px;
+        background: #004d40;
+        color: white;
+    }
+
+    .header img {
+        width: 80px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .header h1 {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+
+    .login-form {
+        padding: 20px;
+    }
+
+    .login-form h2 {
+        font-size: 1.1rem;
+        color: #00695c;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        color: #004d40;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    .form-button {
+        width: 100%;
+        background: #004d40;
+        color: white;
+        font-size: 1rem;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .form-button:hover {
+        background: #00796b;
+    }
+
+    .forgot-password {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .forgot-password a {
+        color: #004d40;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .forgot-password a:hover {
+        color: #00695c;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 10px;
+        background: #004d40;
+        color: white;
+        font-size: 0.8rem;
+    }
+
+    .info-section {
+        background: #e0f7fa;
+        padding: 15px;
+        text-align: center;
+        font-size: 0.8rem;
+        border-top: 1px solid #ccc;
+    }
+
+    .info-section p {
+        margin: 0;
+        color: #004d40;
+    }
+
+    .info-section a {
+        color: #00695c;
+        text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
         .login-container {
-            width: 400px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .header {
-            text-align: center;
-            padding: 20px;
-            background: #004d40;
-            color: white;
-        }
-
-        .header img {
-            width: 100px;
-            margin-bottom: 10px;
+            width: 95%;
         }
 
         .header h1 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
-
-        .login-form {
-            padding: 20px;
+            font-size: 1rem;
         }
 
         .login-form h2 {
-            font-size: 1.2rem;
-            color: #00695c;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #004d40;
+            font-size: 1rem;
         }
 
         .form-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            font-size: 0.9rem;
         }
 
         .form-button {
-            width: 100%;
-            background: #004d40;
-            color: white;
-            font-size: 1rem;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .form-button:hover {
-            background: #00796b;
-        }
-
-        .forgot-password {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .forgot-password a {
-            color: #004d40;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password a:hover {
-            color: #00695c;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background: #004d40;
-            color: white;
             font-size: 0.9rem;
         }
 
-        .message {
-            margin-top: 10px;
-            text-align: center;
-            font-size: 0.9rem;
+        .info-section {
+            font-size: 0.7rem;
         }
-    </style>
+    }
+</style>
 </head>
 <body>
+
 <div class="login-container">
-    <!-- Header -->
+    <!-- Header with Logo -->
     <div class="header">
         <img src="logo.png" alt="DIU Logo">
         <h1>Student Semester Result Portal</h1>
@@ -159,6 +200,11 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         </div>
     </div>
 
+    <!-- Info Section -->
+    <div class="info-section">
+        <p>Are You a New Student? | <a href="#">What is Student Portal?</a> | <a href="#">How to Use Student Portal</a></p>
+    </div>
+
     <!-- Footer -->
     <div class="footer">
         &copy; <?= date('Y') ?> All Rights Reserved @ Daffodil International University.
@@ -177,11 +223,8 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         messageElement.style.color = "#00695c";
 
         try {
-            const response = await fetch('https://diursultv2-namk.onrender.com/dapis.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
+            const url = `http://localhost/dapis.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&grecaptcha=`;
+            const response = await fetch(url);
 
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
@@ -214,5 +257,6 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         }
     });
 </script>
+
 </body>
 </html>
