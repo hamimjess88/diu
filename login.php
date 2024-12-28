@@ -1,7 +1,8 @@
 <?php
+// PHP: login.php
 session_start();
 
-// If already logged in, redirect to index.php
+// Redirect to index.php if already logged in
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     header("Location: index.php");
     exit;
@@ -16,6 +17,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     <title>Login - DIU Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
             margin: 0;
             padding: 0;
@@ -122,24 +124,16 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
             font-size: 0.9rem;
         }
 
-        .info-section {
-            background: #e0f7fa;
-            padding: 15px;
+        .message {
+            margin-top: 10px;
             text-align: center;
             font-size: 0.9rem;
-            border-top: 1px solid #ccc;
-        }
-
-        .info-section p {
-            margin: 0;
-            color: #004d40;
         }
     </style>
 </head>
 <body>
-
 <div class="login-container">
-    <!-- Header with Logo -->
+    <!-- Header -->
     <div class="header">
         <img src="logo.png" alt="DIU Logo">
         <h1>Student Semester Result Portal</h1>
@@ -165,11 +159,6 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         </div>
     </div>
 
-    <!-- Info Section -->
-    <div class="info-section">
-        <p>Are You a New Student? | <a href="#">What is Student Portal?</a> | <a href="#">How to Use Student Portal</a></p>
-    </div>
-
     <!-- Footer -->
     <div class="footer">
         &copy; <?= date('Y') ?> All Rights Reserved @ Daffodil International University.
@@ -188,8 +177,11 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         messageElement.style.color = "#00695c";
 
         try {
-            const url = `http://diursultv2-namk.onrender.com/dapis.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&grecaptcha=`;
-            const response = await fetch(url);
+            const response = await fetch('https://diursultv2-namk.onrender.com/dapis.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
@@ -222,6 +214,5 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         }
     });
 </script>
-
 </body>
 </html>
