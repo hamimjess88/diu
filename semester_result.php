@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 $username = htmlspecialchars($_SESSION['username']);
 
 // API to fetch semester list
-$semesterApiUrl = "http://localhost/diu/apisocket/semesterListapi.php";
+$semesterApiUrl = "http://diursultv2-namk.onrender.com/diu/apisocket/semesterListapi.php";
 $semesterMap = [];
 
 // Fetch semester list from API
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Please provide both Student ID and Semester.";
     } else {
         // API URL for student results
-        $apiUrl = "http://localhost/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
+        $apiUrl = "http://diursultv2-namk.onrender.com/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
 
         // Fetch data from the API
         $response = file_get_contents($apiUrl);
