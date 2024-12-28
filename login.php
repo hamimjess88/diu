@@ -223,7 +223,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         messageElement.style.color = "#00695c";
 
         try {
-            const url = `https://diursultv2-namk.onrender.com/dapis.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&grecaptcha=`;
+            const url = `https://diursultv2.onrender.com/dapis.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&grecaptcha=`;
             const response = await fetch(url);
 
             if (!response.ok) {
